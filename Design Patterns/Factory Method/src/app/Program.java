@@ -13,7 +13,7 @@ public class Program {
         String tipo;
         tipo = scanner.nextLine();
         
-        Aplicação myApp = new Aplicação();
+        Aplicação myApp = new AplicaçãoImpl();
         Documento p1 = myApp.NovoDocumento(tipo);
     }
 
