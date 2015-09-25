@@ -1,25 +1,30 @@
 package app;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 
 public class AplicaçãoImpl extends Aplicação {
 
     @Override
-    public Documento criarDocumento(String tipo)
+    public Documento criarDocumento()
     {
         Documento  doc;
-        
-        switch(tipo)
+
+        Properties prop = new Properties();
+        InputStream in;
+        in = getClass().getResourceAsStream("/app/app.properties");
+        try 
         {
-            case "pdf":
-                doc = new DocumentoPdf();
-                break;
-            case "word":
-                doc = new DocumentoWord();
-                break;
-            default:
-                throw new RuntimeException("Tipo de documento não existe");
+            prop.load(in);
+            in.close();
+            
+            String documentClass = "app." + (String) prop.get("document_class");
+            doc = (Documento) Class.forName(documentClass).newInstance();
+        } 
+        catch (Exception ex)  {
+            throw new RuntimeException("Tipo de documento inválido");
         }
-        
         
         return doc;
     }

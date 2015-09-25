@@ -6,13 +6,13 @@ public abstract class Aplicação
 {
     List<Documento> documentos = new ArrayList<>();
     
-    public abstract Documento criarDocumento(String tipo);
+    public abstract Documento criarDocumento();
     
     
-    public Documento NovoDocumento(String tipo)
+    public Documento NovoDocumento()
     {
         Documento doc;
-        doc = criarDocumento(tipo);
+        doc = criarDocumento();
         documentos.add(doc);
         doc.abrir();
         return doc;
